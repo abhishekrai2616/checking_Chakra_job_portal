@@ -79,11 +79,10 @@ const JobDetailsForm: React.FC<JobDetailsFormProps> = ({ handleNext, handlePrevi
           type="button"
           onClick={() => {
             formik.handleSubmit();
-            const allFieldsTouched = Object.keys(formik.initialValues).every(
-              (key) => formik?.touched[key]
-            );
-            if (Object.keys(formik.errors).length === 0 && allFieldsTouched) {
-              handleNext(); // Only navigate if the form is valid
+            const filledFieldsCount = Object.values(formik.values).filter(value => value !== '').length;
+
+            if (filledFieldsCount === 3 && Object.keys(formik.errors).length === 0) {
+              handleNext(); 
             }
           }}
         >
